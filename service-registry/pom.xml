@@ -48,6 +48,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>netflix-eureka-service-registry</finalName>
 	</build>
-
 </project>

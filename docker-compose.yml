@@ -1,0 +1,66 @@
+version: '3.8'
+
+networks:
+  spring-cloud-network:
+    driver: bridge
+
+services:
+  service-registry:
+    build:
+      context: ./service-registry
+      dockerfile: Dockerfile
+    container_name: netflix-eureka-service-registry
+    ports:
+      - "8761:8761"
+    networks:
+      - spring-cloud-network
+
+  cloud-config-server:
+    build:
+      context: ./cloud-config-server
+      dockerfile: Dockerfile
+    container_name: cloud-config-server
+    ports:
+      - "8083:8083"
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - service-registry
+
+  department-service:
+    build:
+      context: ./department-service
+      dockerfile: Dockerfile
+    container_name: department-service
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - cloud-config-server
+      - service-registry
+
+  user-service:
+    build:
+      context: ./user-service
+    container_name: user-service
+    ports:
+      - "8081:8081"
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - cloud-config-server
+      - service-registry
+
+  cloud-api-gateway:
+    build:
+      context: ./cloud-api-gateway
+      dockerfile: Dockerfile
+    container_name: cloud-api-gateway
+    ports:
+      - "8082:8082"
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - cloud-config-server
+      - service-registry

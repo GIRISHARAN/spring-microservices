@@ -1,15 +1,17 @@
-package com.microservice.gateway;
+package com.microservice.cloud.configserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.config.server.EnableConfigServer;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-// @CircuitBreaker(name = "api-gateway", fallbackMethod = "alternativeMethod")
-public class CloudApiGatewayApplication {
+@EnableConfigServer
+public class CloudConfigServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CloudApiGatewayApplication.class, args);
+		SpringApplication.run(CloudConfigServerApplication.class, args);
 	}
+
 }

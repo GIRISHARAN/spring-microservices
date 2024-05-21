@@ -1,6 +1,8 @@
 # spring-microservices
 Spring Microservices application contains
 
+Spring Cloud Gateway + Eureka Server + Microservice
+
 1) Department Service - server.port : 8080
 
 2) User Service - server.port : 8081

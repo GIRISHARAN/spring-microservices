@@ -6,6 +6,7 @@ import com.microservice.department.service.DepartmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 
@@ -13,6 +14,8 @@ import java.util.List;
 @RequestMapping("/departments")
 @Slf4j
 public class DepartmentController {
+
+    @Value("${eureka.client.service-url.defaultZone}") String eurekaServerName;
 
     @Autowired
     private DepartmentService departmentService;
@@ -32,6 +35,7 @@ public class DepartmentController {
     @GetMapping("/getAllDepts")
     public List<Department> findAllDepartments() {
         log.info("Inside findDepartmentById method of DepartmentController");
+        System.out.println(eurekaServerName);
         return departmentService.getALlDeptList();
     }
 

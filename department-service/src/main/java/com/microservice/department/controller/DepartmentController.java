@@ -15,10 +15,9 @@ import java.util.List;
 @Slf4j
 public class DepartmentController {
 
-    @Value("${eureka.client.service-url.defaultZone}") String eurekaServerName;
-
     @Autowired
     private DepartmentService departmentService;
+
 
     @PostMapping("/saveDept")
     public Department saveDepartment(@RequestBody Department department) {
@@ -35,7 +34,6 @@ public class DepartmentController {
     @GetMapping("/getAllDepts")
     public List<Department> findAllDepartments() {
         log.info("Inside findDepartmentById method of DepartmentController");
-        System.out.println(eurekaServerName);
         return departmentService.getALlDeptList();
     }
 
